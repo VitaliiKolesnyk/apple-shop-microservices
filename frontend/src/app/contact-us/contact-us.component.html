@@ -1,0 +1,58 @@
+<div class="contact-us-container">
+  <h1>Contact Us</h1>
+
+  <!-- Show styled success message with animation -->
+  <div
+    *ngIf="successMessage"
+    class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-md relative mb-6 flex justify-between items-center transition ease-in-out duration-500 transform"
+    [ngClass]="{ 'opacity-100': successMessage, 'opacity-0': !successMessage }"
+    role="alert"
+  >
+    <div>
+      <strong class="font-bold">Success!</strong>
+      <span class="ml-2">{{ successMessage }}</span>
+    </div>
+    <button (click)="successMessage = ''" class="text-green-500 hover:text-green-700 focus:outline-none">
+      <svg class="fill-current h-6 w-6" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <title>Close</title>
+        <path
+          d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 00-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 101.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="email">Email Address:</label>
+      <input
+        id="email"
+        formControlName="email"
+        type="email"
+        placeholder="Enter your email"
+        [disabled]="isAuthenticated">  <!-- Disable field if authenticated -->
+      <div *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched" class="error-message">
+        <small *ngIf="contactForm.get('email')?.errors?.['required']">Email is required.</small>
+        <small *ngIf="contactForm.get('email')?.errors?.['email']">Enter a valid email.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="subject">Subject:</label>
+      <input id="subject" formControlName="subject" type="text" placeholder="Enter subject" />
+      <div *ngIf="contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched" class="error-message">
+        <small>Subject is required.</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="emailBody">Message:</label>
+      <textarea id="emailBody" formControlName="emailBody" placeholder="Enter your message"></textarea>
+      <div *ngIf="contactForm.get('emailBody')?.invalid && contactForm.get('emailBody')?.touched" class="error-message">
+        <small>Message is required.</small>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="contactForm.invalid" class="submit-button">Send</button>
+  </form>
+</div>

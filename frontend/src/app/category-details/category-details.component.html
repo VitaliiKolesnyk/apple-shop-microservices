@@ -1,0 +1,63 @@
+<div class="product-details-container">
+  <div class="product-image">
+    <img [src]="category?.thumbnailUrl" alt="{{ category?.name }}" />
+  </div>
+
+  <!-- Admin Edit Fields -->
+  <ng-container *ngIf="category">
+    <div class="admin-section">
+      <h2>Edit Category</h2>
+
+      <div class="form-group">
+        <label for="thumbnail">Thumbnail:</label>
+        <input id="thumbnail" type="file" (change)="onFileSelected($event)" />
+      </div>
+
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input id="name" type="text" [(ngModel)]="category.name" />
+      </div>
+
+      <button class="update-button" (click)="updateCategory(category.id)">
+        Update Category
+      </button>
+    </div>
+  </ng-container>
+
+  <!-- Success and Error Messages -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Recursive Subcategories Display -->
+  <div *ngIf="category?.subcategories" class="subcategories-list">
+    <h3>Subcategories</h3>
+    <ul>
+      <ng-container *ngFor="let subcategory of category?.subcategories">
+        <li class="subcategory-item">
+          {{ subcategory.name }}
+          <button (click)="deleteCategory(subcategory?.id)" [disabled]="!subcategory?.id">
+            Delete
+          </button>
+
+          <!-- Recursively display subcategories for this subcategory -->
+          <div *ngIf="subcategory?.subcategories" class="nested-subcategories">
+            <ul>
+              <ng-container *ngFor="let childSubcategory of subcategory.subcategories">
+                <li class="subcategory-item">
+                  {{ childSubcategory.name }}
+                  <button (click)="deleteCategory(childSubcategory?.id)" [disabled]="!childSubcategory?.id">
+                    Delete
+                  </button>
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</div>

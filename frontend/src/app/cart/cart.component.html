@@ -1,0 +1,163 @@
+<div *ngIf="cart; else emptyCart" class="container mx-auto p-6 bg-white shadow-lg rounded-lg transition">
+  <h2 class="text-3xl font-semibold mb-4 text-gray-900 border-b-2 pb-2 border-gray-900">Your Cart</h2>
+
+  <!-- Order Success Message -->
+  <div *ngIf="orderSuccess" class="mt-4 p-4 bg-gray-200 text-gray-900 rounded-md">
+    <p>{{ successMessage }}</p>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="orderFailed" class="mt-4 p-4 bg-red-200 text-red-900 rounded-md">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <ul class="space-y-4">
+    <li *ngFor="let item of cart.cartItems" class="flex justify-between items-center p-4 bg-gray-50 rounded-md shadow-md transition hover:bg-gray-100">
+
+      <!-- Item Content Container -->
+      <div class="flex items-center space-x-4 flex-1">
+        <!-- Thumbnail Image -->
+        <img [src]="item.thumbnailUrl" alt="{{ item.product.name }}" class="w-16 h-16 object-cover rounded-md shadow-sm" />
+
+        <!-- Item Name -->
+        <div class="text-left w-1/3"> <!-- Fixed width for item name -->
+          <h3 class="text-xl font-semibold text-gray-800">{{ item.product.name }}</h3>
+        </div>
+      </div>
+
+      <!-- Quantity Controls in Center -->
+      <div class="flex items-center justify-center space-x-2 w-1/3">
+        <button (click)="changeQuantity(item, -1)" class="text-2xl text-gray-800 px-2 py-1 rounded-md hover:bg-gray-300">-</button>
+        <span class="text-lg font-semibold text-gray-800">{{ item.quantity }}</span>
+        <button (click)="changeQuantity(item, +1)" class="text-2xl text-gray-800 px-2 py-1 rounded-md hover:bg-gray-300">+</button>
+      </div>
+
+      <!-- Price and Remove at the End -->
+      <div class="flex items-center justify-end space-x-4 w-1/3">
+        <p class="text-lg font-bold text-gray-900">${{ item.totalPrice.toFixed(2) }}</p>
+        <button (click)="removeItem(item.product.id!)" class="text-xl text-red-600 hover:text-red-800 transition duration-300">
+          &times;
+        </button>
+      </div>
+
+    </li>
+  </ul>
+
+  <!-- Cart Total -->
+  <div class="mt-6 text-right">
+    <h3 class="text-2xl font-bold text-gray-900">Total: <span class="text-black">${{ cart.totalPrice?.toFixed(2) }}</span></h3>
+  </div>
+
+  <!-- Buttons to Place Order or Clear Cart -->
+  <div class="mt-6 flex justify-end space-x-4">
+    <button
+      (click)="orderProduct()"
+      class="px-6 py-2 bg-gray-800 hover:bg-gray-900 text-white font-semibold rounded-lg transition duration-300 shadow-md">
+      Place Order
+    </button>
+
+    <button
+      (click)="clearCart()"
+      class="px-6 py-2 bg-gray-800 hover:bg-gray-900 text-white font-semibold rounded-lg transition duration-300 shadow-md">
+      Clear Cart
+    </button>
+  </div>
+
+  <!-- Checkout Form -->
+  <div *ngIf="showCheckoutForm" class="mt-8 p-6 bg-gray-100 rounded-lg shadow-md">
+    <h3 class="text-2xl font-semibold mb-4 text-gray-900">Enter Your Details</h3>
+
+    <form (ngSubmit)="confirmOrder(checkoutForm)" #checkoutForm="ngForm">
+      <div class="mb-4">
+        <label for="name" class="block text-sm font-semibold text-gray-900 mb-2">Name</label>
+        <input id="name" [(ngModel)]="checkoutDetails.name" name="name" required minlength="2"
+               #name="ngModel" class="border rounded px-4 py-2 w-full" type="text">
+        <div *ngIf="name.invalid && name.touched" class="text-red-600">
+          <small *ngIf="name.errors?.['required']">Name is required.</small>
+          <small *ngIf="name.errors?.['minlength']">Name must be at least 2 characters long.</small>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="surname" class="block text-sm font-semibold text-gray-900 mb-2">Surname</label>
+        <input id="surname" [(ngModel)]="checkoutDetails.surname" name="surname" required minlength="2"
+               #surname="ngModel" class="border rounded px-4 py-2 w-full" type="text">
+        <div *ngIf="surname.invalid && surname.touched" class="text-red-600">
+          <small *ngIf="surname.errors?.['required']">Surname is required.</small>
+          <small *ngIf="surname.errors?.['minlength']">Surname must be at least 2 characters long.</small>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-semibold text-gray-900 mb-2">Email</label>
+        <input id="email" [(ngModel)]="checkoutDetails.email" name="email" required email
+               #email="ngModel" class="border rounded px-4 py-2 w-full" type="email">
+        <div *ngIf="email.invalid && email.touched" class="text-red-600">
+          <small *ngIf="email.errors?.['required']">Email is required.</small>
+          <small *ngIf="email.errors?.['email']">Please enter a valid email address.</small>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="phone" class="block text-sm font-semibold text-gray-900 mb-2">Phone</label>
+        <div class="flex space-x-2">
+          <!-- Country Code Dropdown -->
+          <input id="countryCode" type="text" [(ngModel)]="checkoutDetails.countryCode" name="countryCode" required
+                 class="border rounded px-4 py-2 w-1/4" list="countryCodesList" placeholder="Select or type a country code">
+
+          <datalist id="countryCodesList">
+            <option *ngFor="let code of countryCodes" [value]="code.code">{{ code.country }} ({{ code.code }})</option>
+          </datalist>
+
+          <!-- Phone Number Input -->
+          <input id="phone" [(ngModel)]="checkoutDetails.phone" name="phone" required
+                 pattern="^\d{9}$" #phone="ngModel" class="border rounded px-4 py-2 w-3/4" type="text">
+        </div>
+
+        <div *ngIf="phone.invalid && phone.touched" class="text-red-600">
+          <small *ngIf="phone.errors?.['required']">Phone number is required.</small>
+          <small *ngIf="phone.errors?.['pattern']">Phone number must be 9 digits.</small>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="country" class="block text-sm font-semibold text-gray-900 mb-2">Country</label>
+        <select id="country" [(ngModel)]="checkoutDetails.country" name="country" required class="border rounded px-4 py-2 w-full">
+          <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="city" class="block text-sm font-semibold text-gray-900 mb-2">City</label>
+        <input id="city" [(ngModel)]="checkoutDetails.city" name="city" required minlength="2"
+               #city="ngModel" class="border rounded px-4 py-2 w-full" type="text">
+        <div *ngIf="city.invalid && city.touched" class="text-red-600">
+          <small *ngIf="city.errors?.['required']">City is required.</small>
+          <small *ngIf="city.errors?.['minlength']">City must be at least 2 characters long.</small>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label for="street" class="block text-sm font-semibold text-gray-900 mb-2">Street</label>
+        <input id="street" [(ngModel)]="checkoutDetails.street" name="street" required minlength="5"
+               #street="ngModel" class="border rounded px-4 py-2 w-full" type="text">
+        <div *ngIf="street.invalid && street.touched" class="text-red-600">
+          <small *ngIf="street.errors?.['required']">Street is required.</small>
+          <small *ngIf="street.errors?.['minlength']">Street must be at least 3 characters long.</small>
+        </div>
+      </div>
+
+      <button type="submit" (click)="triggerValidation(checkoutForm)"
+              class="px-6 py-2 bg-gray-800 hover:bg-gray-900 text-white font-semibold rounded-lg transition duration-300 shadow-md">
+        Pay Order
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Empty Cart Template -->
+<ng-template #emptyCart>
+  <div class="container mx-auto p-6 text-center bg-white shadow-lg rounded-lg">
+    <h2 class="text-3xl font-semibold mb-4 text-gray-900">Your cart is empty</h2>
+  </div>
+</ng-template>

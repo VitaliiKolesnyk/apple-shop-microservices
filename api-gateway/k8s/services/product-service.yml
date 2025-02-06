@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: product-service
+  template:
+    metadata:
+      labels:
+        app: product-service
+    spec:
+      containers:
+        - name: product-service
+          image: vitkolesnyk/product-service:9.86
+          env:
+            - name: SPRING_KAFKA_BOOTSTRAP-SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_KAFKA_BOOTSTRAP-SERVERS
+                  name: common-config
+            - name: SPRING_DATA_MONGODB_URI
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_DATA_MONGODB_URI
+                  name: product-service-config
+            - name: SPRING_CLOUD_AWS_CREDENTIALS_ACCESS-KEY
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_CLOUD_AWS_CREDENTIALS_ACCESS-KEY
+                  name: product-service-config
+            - name: SPRING_CLOUD_AWS_CREDENTIALS_SECRET-KEY
+              valueFrom:
+                configMapKeyRef:
+                  key: SPRING_CLOUD_AWS_CREDENTIALS_SECRET-KEY
+                  name: product-service-config
+            - name: LOKI_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: LOKI_URL
+                  name: common-config
+            - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+                  name: common-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+spec:
+  selector:
+    app: product-service
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: product-service-config
+data:
+   SPRING_DATA_MONGODB_URI: "mongodb://root:password@mongodb:27017/product-service?authSource=admin"
+   SPRING_CLOUD_AWS_CREDENTIALS_ACCESS-KEY:
+   SPRING_CLOUD_AWS_CREDENTIALS_SECRET-KEY:
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: product-service-hpa
+  namespace: default
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: product-service
+  minReplicas: 2
+  maxReplicas: 3
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80

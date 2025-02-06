@@ -1,0 +1,108 @@
+:root {
+  --primaryDarkColor: #000000; /* Black background */
+  --textColor: #000000; /* Set to black for text */
+  --inputBackground: #ffffff; /* White input fields */
+  --inputTextColor: #000000; /* Black input text */
+  --buttonBackgroundColor: #000000; /* Black buttons */
+  --buttonTextColor: #ffffff; /* White button text */
+}
+
+body {
+  background-color: var(--primaryDarkColor);
+  color: var(--textColor); /* This sets the body text color to black */
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+#kc-header {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--textColor); /* Ensure header text color is also black */
+}
+
+#kc-header img {
+  max-width: 150px; /* Adjust based on your logo size */
+  height: auto;
+}
+
+#kc-form-wrapper {
+  background-color: #ffffff; /* White form background */
+  border-radius: 10px;
+  padding: 2rem;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  color: var(--textColor); /* Ensure form text color is also black */
+}
+
+input[type="text"],
+input[type="password"] {
+  background-color: var(--inputBackground);
+  color: var(--inputTextColor); /* Text color for inputs */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1rem;
+}
+
+#kc-social-providers h4 {
+  text-align: center;
+  color: #555;
+}
+
+.kcFormSocialAccountListClass {
+  list-style-type: none;
+  padding: 0;
+}
+
+.kcFormSocialAccountListButtonClass {
+  display: block;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #e7e7e7;
+  color: #333;
+  transition: background-color 0.3s;
+}
+
+.kcFormSocialAccountListButtonClass:hover {
+  background-color: #d0d0d0;
+}
+
+/* Adjust the footer if needed */
+footer {
+  text-align: center;
+  color: #ccc;
+  margin-top: 20px;
+}
+
+.kcButtonPrimaryClass,
+.kcButtonPrimaryClass.kcButtonBlockClass,
+.kcButtonPrimaryClass.kcButtonLargeClass {
+  background-color: var(--buttonBackgroundColor);
+  color: var(--buttonTextColor);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center; /* Ensure text is centered */
+  font-size: 16px; /* Adjust font size if needed */
+}
+
+/* Hover effect */
+.kcButtonPrimaryClass:hover {
+  background-color: #333; /* Darker black on hover */
+}
+
+/* Focus style for accessibility */
+.kcButtonPrimaryClass:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 0 3px rgba(51, 51, 51, 0.5); /* Custom focus outline */
+}

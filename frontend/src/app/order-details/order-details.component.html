@@ -1,0 +1,85 @@
+<div class="container mt-5">
+  <div class="card shadow-lg border-0">
+    <!-- Card Header with Title and Status -->
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Order Details</h5>
+      <span class="badge {{ order.status === 'Delivered' ? 'bg-success' : 'bg-warning' }} status-badge">
+        {{ order.status }}
+      </span>
+    </div>
+
+    <div class="card-body">
+      <!-- Order Summary Section -->
+      <div class="mb-5">
+        <h4 class="section-title">Order Summary</h4>
+        <div class="summary-container p-4 bg-light rounded shadow-sm">
+          <div class="row">
+            <div class="col-md-6 label-column">
+              <p>Order Number:</p>
+              <p>Quantity:</p>
+              <p>Total Amount:</p>
+              <p>Ordered At:</p>
+              <p>Delivered At:</p>
+            </div>
+            <div class="col-md-6 value-column">
+              <p>{{ order.orderNumber }}</p>
+              <p>{{ order.quantity }}</p>
+              <p>${{ order.totalAmount | number: '1.2-2' }}</p>
+              <p>{{ order?.orderedAt | date: 'medium' }}</p>
+              <p>{{ order?.deliveredAt ? (order.deliveredAt | date: 'medium') : 'Pending' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Details Section -->
+      <div class="mb-5">
+        <h4 class="section-title">Contact Details</h4>
+        <div class="contact-container p-4 bg-light rounded shadow-sm">
+          <div class="row">
+            <div class="col-md-6 label-column">
+              <p>Name:</p>
+              <p>Surname:</p>
+              <p>Country:</p>
+              <p>City:</p>
+              <p>Street:</p>
+              <p>Email:</p>
+              <p>Phone:</p>
+            </div>
+            <div class="col-md-6 value-column">
+              <p>{{ order.contactDetails.name }}</p>
+              <p>{{ order.contactDetails.surname }}</p>
+              <p>{{ order.contactDetails.country }}</p>
+              <p>{{ order.contactDetails.city }}</p>
+              <p>{{ order.contactDetails.street }}</p>
+              <p>{{ order.contactDetails.email }}</p>
+              <p>{{ order.contactDetails.phone }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Products Section -->
+      <h4 class="section-title">Products</h4>
+      <ul class="list-group">
+        <li *ngFor="let product of order.products" class="list-group-item d-flex justify-content-between align-items-center mb-3 product-item">
+          <div class="d-flex align-items-center">
+            <img [src]="product.thumbnailUrl" alt="{{ product.name }}" class="product-icon mr-3 rounded">
+            <div>
+              <h5>{{ product.name }} <span class="text-muted">({{ product.skuCode }})</span></h5>
+              <p class="mb-1">Quantity: <strong>{{ product.quantity }}</strong></p>
+              <p class="mb-0">Price: <strong>${{ product.price | number: '1.2-2' }}</strong></p>
+            </div>
+          </div>
+          <span class="badge bg-primary text-white">Total: ${{ product.totalAmount | number: '1.2-2' }}</span>
+        </li>
+      </ul>
+
+      <div class="text-end mt-4">
+        <button *ngIf="hasUserRole() && order.status === 'NEW'" (click)="goToPayment()" class="btn btn-success">
+          Pay Order
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

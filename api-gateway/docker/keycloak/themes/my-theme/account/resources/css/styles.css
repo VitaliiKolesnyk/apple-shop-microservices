@@ -1,0 +1,60 @@
+body {
+    background-color: #fff;
+    color: #000;
+}
+
+.login-header, .kc-header {
+    background-color: #000;
+    color: #fff;
+}
+
+.kc-form-login, .kc-form {
+    background-color: #fff;
+    border: 1px solid #000;
+    box-shadow: none;
+}
+
+.btn, .btn-primary {
+    background-color: #000;
+    color: #fff;
+    border: none;
+}
+
+a {
+    color: #000;
+}
+
+.kc-header {
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+}
+
+.kc-logo img {
+    max-width: 150px;
+}
+
+.kc-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.kc-nav ul li {
+    margin-left: 20px;
+}
+
+.kc-nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.kc-footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}

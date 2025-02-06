@@ -1,0 +1,180 @@
+/* Container for the entire details page */
+.email-details {
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  color: #000; /* Black text for consistency */
+  background-color: #fff; /* White background for a modern feel */
+  padding: 20px;
+}
+
+/* Header styling */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #000; /* Black for header */
+}
+
+/* Card styling for email information and conversation */
+.card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border: 1px solid #ddd; /* Light border */
+}
+
+/* Info section styling */
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.info-item label {
+  font-weight: bold;
+  color: #333; /* Darker label color */
+}
+
+.message-timestamp {
+  font-size: 14px;
+  color: #777; /* Light gray text for timestamps */
+  margin-top: 5px;
+  background-color: inherit; /* Ensure the timestamp background matches the message */
+}
+
+/* Styles for message items */
+.message-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.right-align {
+  text-align: right;
+  align-items: flex-end;
+  background-color: #e0f7fa; /* Soft light blue for admin replies */
+}
+
+.left-align {
+  text-align: left;
+  align-items: flex-start;
+  background-color: #f1f1f1; /* Light gray background for customer replies */
+}
+
+.message-body {
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 80%;
+  background-color: inherit; /* Inherit the background of the message item */
+}
+
+.sender-email {
+  font-size: 0.85em;
+  color: #333;
+  font-weight: bold;
+}
+
+.message-item.right-align .message-body,
+.message-item.left-align .message-body {
+  background-color: inherit; /* Inherit the background of the message item */
+}
+
+.conversation-block {
+  margin-top: 20px;
+}
+
+/* Reply form styling */
+.reply-form textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9; /* Light background for text area */
+}
+
+/* Send button styling */
+.btn-send {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #000; /* Black background for the button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-send:hover {
+  background-color: #333; /* Darker black on hover */
+}
+
+/* Close button styling */
+.close-btn-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.delete-btn {
+  padding: 10px 20px;
+  background-color: #ff5c5c; /* Red for delete button */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0 auto;
+}
+
+.delete-btn:hover {
+  background-color: #e60000; /* Darker red on hover */
+}
+
+/* Success message styling */
+.success-message {
+  background-color: #f0f9f0; /* Very light green background */
+  border: 1px solid #d4edda; /* Green border */
+  color: #155724; /* Dark green text */
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.success-message strong {
+  margin-right: 10px;
+}
+
+/* Success message animation */
+.success-message {
+  animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Textarea styling for responsiveness */
+.reply-form textarea:focus {
+  border-color: #000; /* Focus effect to highlight the textarea */
+  outline: none;
+}

@@ -1,0 +1,205 @@
+.container {
+  background-color: white;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.container:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+h2 {
+  color: #1a1a1a; /* Dark gray */
+}
+
+h3 {
+  color: #333; /* Medium dark gray */
+}
+
+.bg-gray-50 {
+  background-color: #f9f9f9; /* Very light gray */
+}
+
+.bg-gray-100 {
+  background-color: #f1f1f1; /* Light gray */
+}
+
+.bg-gray-200 {
+  background-color: #e1e1e1; /* Slightly darker light gray */
+}
+
+.text-gray-800 {
+  color: #333; /* Medium dark gray */
+}
+
+.text-gray-900 {
+  color: #1a1a1a; /* Dark gray */
+}
+
+.text-black {
+  color: black;
+}
+
+.bg-gray-800 {
+  background-color: #1a1a1a; /* Dark gray */
+}
+
+.bg-gray-900 {
+  background-color: #000; /* Black */
+}
+
+.bg-red-200 {
+  background-color: #ffcccb; /* Light red */
+}
+
+.text-red-900 {
+  color: #cc0000; /* Dark red */
+}
+
+button:hover {
+  transform: scale(1.05);
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+/* Buttons for quantity */
+button {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+input[type="number"] {
+  width: 3rem;
+  text-align: center;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid #d1d5db;
+  background-color: #fff;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: #4b5563;
+}
+
+/* Customize quantity buttons */
+.bg-gray-300 {
+  background-color: #e5e7eb; /* Light gray background */
+}
+
+.bg-gray-400 {
+  background-color: #d1d5db; /* Darker gray background */
+}
+
+.text-gray-800 {
+  color: #333; /* Dark text color */
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem; /* Rounded corners */
+}
+
+.transition {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Center quantity buttons and align cart items properly */
+button.text-2xl {
+  font-size: 1.25rem;
+  padding: 0.25rem;
+}
+
+button.text-xl {
+  font-size: 1.5rem;
+}
+
+button:hover {
+  background-color: #f3f4f6; /* Light gray background on hover */
+}
+
+button:focus {
+  outline: none;
+}
+
+.text-gray-800 {
+  color: #333; /* Adjust text color for better visibility */
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.items-center {
+  display: flex;
+  align-items: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.space-x-4 {
+  margin-right: 1rem;
+}
+
+.text-right .text-lg {
+  margin-top: 20px;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Ensure consistent item content width */
+.text-left {
+  flex-shrink: 0;
+}
+
+/* Make sure the quantity controls and price stay aligned */
+.flex-1 {
+  flex-grow: 1;
+}
+
+/* Flexbox centering for the quantity controls */
+.justify-center {
+  justify-content: center;
+}
+
+/* Keep the price aligned to the right */
+.justify-end {
+  justify-content: flex-end;
+}
+
+@media (min-width: 640px) {
+  .my-custom-class {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}

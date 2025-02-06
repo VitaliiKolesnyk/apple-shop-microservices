@@ -1,0 +1,34 @@
+.container {
+  background-color: #f8f8f8; /* Light gray background for contrast */
+}
+
+.alert {
+  background-color: #ffffff; /* White background for alerts */
+}
+
+.bg-black {
+  background-color: #000000; /* Black background for the button */
+}
+
+.border-gray-300 {
+  border-color: #d1d5db; /* Light gray for borders */
+}
+
+.text-black {
+  color: #000000; /* Black text */
+}
+
+.focus\:ring-gray-400:focus {
+  box-shadow: 0 0 0 0.2rem rgba(156, 163, 175, 0.25); /* Subtle focus effect */
+}
+
+/* Add transition effects for buttons */
+.hover\:bg-gray-800:hover {
+  background-color: #4b5563; /* Darker gray on hover */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+

@@ -1,0 +1,149 @@
+<div class="sidebar bg-black text-white h-screen p-6 fixed top-0 left-0 w-64 shadow-lg overflow-y-auto">
+  <!-- Navigation Header -->
+  <h2 class="text-2xl font-semibold mb-6">Navigation</h2>
+
+  <!-- Categories List with Collapsible Subcategories -->
+  <ul>
+    <li *ngFor="let category of categories" class="mb-2">
+      <!-- Main Category -->
+      <div class="flex justify-between items-center p-3 rounded-lg hover:bg-gray-800 cursor-pointer transition ease-in-out duration-200">
+        <!-- Clicking the category sends request to backend -->
+        <a (click)="onCategoryClick(category)" class="w-full">
+          {{ category.name }}
+        </a>
+        <!-- Clicking the arrow expands or collapses subcategories -->
+        <button (click)="toggleSubcategories(category.id)">
+          <svg *ngIf="expandedCategories[category.id]" class="w-4 h-4 transform rotate-180 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 12a1 1 0 01-.7-.3l-5-5a1 1 0 111.4-1.4L10 9.6l4.3-4.3a1 1 0 011.4 1.4l-5 5a1 1 0 01-.7.3z" clip-rule="evenodd"/>
+          </svg>
+          <svg *ngIf="!expandedCategories[category.id]" class="w-4 h-4 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5 8a1 1 0 011.7-.7l4.3 4.3 4.3-4.3a1 1 0 011.4 1.4l-5 5a1 1 0 01-1.4 0l-5-5A1 1 0 015 8z" clip-rule="evenodd"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- First Level Subcategories -->
+      <ul *ngIf="expandedCategories[category.id] && category.subcategories" class="pl-6 mt-2 space-y-2">
+        <li *ngFor="let subcategory of category.subcategories">
+          <div class="flex justify-between items-center p-2 rounded-lg hover:bg-gray-700 cursor-pointer transition ease-in-out duration-200">
+            <!-- Clicking the subcategory sends request to backend -->
+            <a (click)="onCategoryClick(subcategory)" class="w-full">
+              {{ subcategory.name }}
+            </a>
+            <!-- Subcategory expand/collapse button -->
+            <button *ngIf="subcategory.subcategories" (click)="toggleSubcategories(subcategory.id)">
+              <svg *ngIf="expandedCategories[subcategory.id]" class="w-4 h-4 transform rotate-180 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 12a1 1 0 01-.7-.3l-5-5a1 1 0 111.4-1.4L10 9.6l4.3-4.3a1 1 0 011.4 1.4l-5 5a1 1 0 01-.7.3z" clip-rule="evenodd"/>
+              </svg>
+              <svg *ngIf="!expandedCategories[subcategory.id]" class="w-4 h-4 transition-transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5 8a1 1 0 011.7-.7l4.3 4.3 4.3-4.3a1 1 0 011.4 1.4l-5 5a1 1 0 01-1.4 0l-5-5A1 1 0 015 8z" clip-rule="evenodd"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Second Level Subcategories -->
+          <ul *ngIf="expandedCategories[subcategory.id] && subcategory.subcategories" class="pl-6 mt-2 space-y-1">
+            <li *ngFor="let secondLevelSubcategory of subcategory.subcategories">
+              <a (click)="onCategoryClick(secondLevelSubcategory)" class="p-2 rounded-lg hover:bg-gray-600 transition ease-in-out duration-200">
+                {{ secondLevelSubcategory.name }}
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <!-- Additional Links for Admin and Developer Roles -->
+  <div class="mt-6">
+    <li *ngIf="hasAdminRole()">
+      <a [routerLink]="['/categories-list']" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition ease-in-out duration-200">
+        <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        <span class="text-lg">Categories</span>
+      </a>
+    </li>
+
+    <li *ngIf="hasAdminRole()">
+      <a [routerLink]="['/orders']" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition ease-in-out duration-200">
+        <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        <span class="text-lg">Orders Panel</span>
+      </a>
+    </li>
+
+    <li *ngIf="hasAdminRole()">
+      <a [routerLink]="['/inventory']" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition ease-in-out duration-200">
+        <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6"></path>
+        </svg>
+        <span class="text-lg">Inventory Panel</span>
+      </a>
+    </li>
+
+    <li *ngIf="hasAdminRole()">
+      <a [routerLink]="['/contact-panel']" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition ease-in-out duration-200">
+        <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6"></path>
+        </svg>
+        <span class="text-lg">Requests Panel</span>
+      </a>
+    </li>
+
+    <li *ngIf="hasAdminRole()">
+      <a href="https://dashboard.stripe.com/test/payments" target="_blank" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition ease-in-out duration-200">
+        <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        <span class="text-lg">Transactions</span>
+      </a>
+    </li>
+
+    <li *ngIf="hasDeveloperRole()">
+      <a href="http://localhost:9000/swagger-ui/index.html" target="_blank" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition ease-in-out duration-200">
+        <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        <span class="text-lg">Open API Docs</span>
+      </a>
+    </li>
+
+    <li *ngIf="hasDeveloperRole()">
+      <a href="http://localhost:30001" target="_blank" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition ease-in-out duration-200">
+        <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        <span class="text-lg">Kafka UI</span>
+      </a>
+    </li>
+
+    <li *ngIf="hasDeveloperRole()">
+      <a href="http://localhost:3000" target="_blank" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition ease-in-out duration-200">
+        <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        <span class="text-lg">Grafana</span>
+      </a>
+    </li>
+
+    <li *ngIf="hasDeveloperRole()">
+      <a href="http://localhost:30010" target="_blank" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition ease-in-out duration-200">
+        <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        <span class="text-lg">Jenkins</span>
+      </a>
+    </li>
+
+    <li *ngIf="hasDeveloperRole()">
+      <a href="http://localhost:8080" target="_blank" class="flex items-center p-3 rounded-lg hover:bg-gray-800 transition ease-in-out duration-200">
+        <svg class="w-5 h-5 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+        </svg>
+        <span class="text-lg">Keycloak</span>
+      </a>
+    </li>
+  </div>
+</div>

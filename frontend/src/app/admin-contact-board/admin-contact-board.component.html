@@ -1,0 +1,84 @@
+<div class="admin-contact-board">
+  <!-- Display the "Requests Panel" title only if the user has admin role -->
+  <h1 *ngIf="hasAdminRole()">Requests Panel</h1>
+
+  <!-- Show Create New Request button only if the user has user role -->
+  <button *ngIf="hasUserRole()" class="create-request-btn" (click)="createNewRequest()">
+    Create New Request
+  </button>
+
+  <!-- Filter and Items per page on the same row -->
+  <div class="filter-items-container">
+    <!-- Filter Section -->
+    <div class="filter-block">
+      <h3>Filter by Status</h3>
+      <div class="filter-section">
+        <select id="status-filter" [(ngModel)]="selectedStatus" (change)="onStatusChange($event)">
+          <option value="OPEN">Open</option>
+          <option value="CLOSED">Closed</option>
+          <option value="ALL">All</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Items per page dropdown -->
+    <div class="items-per-page">
+      <label for="itemsPerPage">Items per page:</label>
+      <select id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange($event)">
+        <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Messages Table -->
+  <table class="message-table">
+    <thead>
+    <tr>
+      <th>Subject</th>
+      <th>Email Address</th>
+      <th>Status</th>
+      <th>Last Reply</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let message of filteredMessages"
+        class="clickable-row"
+        [ngClass]="getMessageClass(message)"
+        (click)="navigateToMessage(message.id)">
+      <td>
+        {{ message.subject }}
+        <span *ngIf="isNewMessage(message)" class="new-message-badge">New Message</span>
+      </td>
+      <td>{{ message.email }}</td>
+      <td>{{ message.status }}</td>
+      <td>{{ message.lastReplyAt | date: 'short' }}</td>
+      <td>
+        <!-- Show "Close" to all users if message is OPEN -->
+        <button *ngIf="message.status === 'OPEN'" class="status-btn" (click)="updateStatus(message.id, 'CLOSED'); $event.stopPropagation()">
+          Close
+        </button>
+
+        <!-- Show "Reopen" only to admin users if message is CLOSED -->
+        <button *ngIf="message.status === 'CLOSED' && hasAdminRole()" class="status-btn" (click)="updateStatus(message.id, 'OPEN'); $event.stopPropagation()">
+          Reopen
+        </button>
+
+        <!-- Delete button only for admin -->
+        <button *ngIf="hasAdminRole()" class="delete-btn" (click)="deleteEmail(message.id); $event.stopPropagation()">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div class="pagination-container">
+    <div class="pagination-nav">
+      <button class="pagination-btn" [disabled]="currentPage === 1" (click)="goToFirstPage()">«</button>
+      <button class="pagination-btn" [disabled]="currentPage === 1" (click)="previousPage()">‹</button>
+      <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
+      <button class="pagination-btn" [disabled]="currentPage === totalPages" (click)="nextPage()">›</button>
+      <button class="pagination-btn" [disabled]="currentPage === totalPages" (click)="goToLastPage()">»</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="container mx-auto p-6 bg-white shadow-lg rounded-xl mt-10">
+  <h2 class="text-4xl font-bold mb-8 text-center text-gray-900">Add New Category</h2>
+
+  <!-- Success and Error Messages -->
+  <div *ngIf="successMessage" class="alert alert-success mb-6">
+    <div>
+      <strong class="font-semibold">Success!</strong>
+      <span class="ml-2">{{ successMessage }}</span>
+    </div>
+    <button (click)="successMessage = ''" class="text-green-600 hover:text-green-900 transition">
+      <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 00-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 001.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z" /></svg>
+    </button>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-error mb-6">
+    <div class="flex items-center">
+      <svg class="h-6 w-6 text-red-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-5a1 1 0 112-0v-4a1 1 0 10-2 0v4zm1-10a1 1 0 100 2 1 1 0 000-2z" /></svg>
+      <strong class="font-semibold">Error:</strong>
+      <span class="ml-2">{{ errorMessage }}</span>
+    </div>
+    <button (click)="errorMessage = ''" class="text-red-600 hover:text-red-900 transition">
+      <svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 00-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 001.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z" /></svg>
+    </button>
+  </div>
+
+  <form [formGroup]="addCategoryForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <!-- Category Name Input -->
+    <div class="space-y-2">
+      <label for="name" class="block text-lg font-medium text-gray-700">Category Name</label>
+      <input id="name" formControlName="name" type="text" placeholder="Enter category name" class="w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+
+      <!-- Error message handling for name field -->
+      <div *ngIf="addCategoryForm.get('name')?.invalid && addCategoryForm.get('name')?.dirty" class="text-red-500 mt-1">
+        <div *ngIf="addCategoryForm.get('name')?.errors?.['required']">Category name is required.</div>
+        <div *ngIf="addCategoryForm.get('name')?.errors?.['minlength']">Category name must be at least 3 characters long.</div>
+      </div>
+    </div>
+
+    <!-- Parent Category Dropdown -->
+    <div class="space-y-2">
+      <label for="parentCategory" class="block text-lg font-medium text-gray-700">Parent Category</label>
+      <select id="parentCategory" formControlName="parentCategoryId" (change)="onParentCategoryChange()" class="w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+      </select>
+    </div>
+
+    <!-- Subcategory Dropdowns -->
+    <div *ngFor="let level of subcategoryLevels; let i = index" class="space-y-2">
+      <label for="subcategory{{i}}" class="block text-lg font-medium text-gray-700">Subcategory Level {{i + 1}}</label>
+      <select [id]="'subcategory' + i" [formControlName]="'subcategoryId' + i" (change)="onSubcategoryChange(i)" class="w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option *ngFor="let subcategory of level.categories" [value]="subcategory.id">{{ subcategory.name }}</option>
+      </select>
+    </div>
+
+    <!-- File Upload for Thumbnail -->
+    <div class="space-y-2">
+      <label for="thumbnail" class="block text-lg font-medium text-gray-700">Upload Thumbnail</label>
+      <input id="thumbnail" type="file" (change)="onFileSelected($event)" class="w-full px-4 py-3 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" [disabled]="addCategoryForm.invalid" class="w-full bg-blue-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-600 transition disabled:opacity-50">
+      Submit
+    </button>
+  </form>
+</div>

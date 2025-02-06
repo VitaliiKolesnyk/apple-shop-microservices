@@ -1,0 +1,53 @@
+<div class="container mx-auto p-4">
+    <h2 class="text-2xl font-bold mb-4">Add Inventory</h2>
+  
+    <!-- Success message -->
+    <div *ngIf="inventoryCreated" class="text-green-500">
+      <h4>Inventory Created Successfully</h4>
+    </div>
+  
+    <!-- Error message -->
+    <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Error:</strong> {{ errorMessage }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  
+    <!-- Add Inventory form -->
+    <form [formGroup]="addInventoryForm" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <label class="block text-gray-700" for="skuCode">SKU Code</label>
+        <input
+          type="text"
+          id="skuCode"
+          formControlName="skuCode"
+          class="border rounded w-full py-2 px-3 text-gray-700"
+        />
+        <div *ngIf="skuCode?.invalid && (skuCode?.dirty || skuCode?.touched)" class="text-red-500">
+          <div *ngIf="skuCode?.errors?.['required']">SKU Code is required.</div>
+        </div>
+      </div>
+  
+      <div class="mb-4">
+        <label class="block text-gray-700" for="quantity">Quantity</label>
+        <input
+          type="number"
+          id="quantity"
+          formControlName="quantity"
+          class="border rounded w-full py-2 px-3 text-gray-700"
+        />
+        <div *ngIf="quantity?.invalid && (quantity?.dirty || quantity?.touched)" class="text-red-500">
+          <div *ngIf="quantity?.errors?.['required']">Quantity is required.</div>
+          <div *ngIf="quantity?.errors?.['min']">Quantity must be greater than 0.</div>
+        </div>
+      </div>
+  
+      <button
+        type="submit"
+        class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+        [disabled]="addInventoryForm.invalid"
+      >
+        Add Inventory
+      </button>
+    </form>
+  </div>
+  

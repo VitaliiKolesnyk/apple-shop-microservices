@@ -1,0 +1,89 @@
+/* General Styles */
+body {
+  background-color: #f4f6f9; /* Softer light gray background */
+  font-family: 'Roboto', sans-serif; /* Modern, clean font */
+  color: #4a4a4a; /* Neutral dark text color */
+}
+
+.container {
+  max-width: 650px; /* Limit form width for readability */
+  background-color: #ffffff; /* White background for form container */
+  border-radius: 16px; /* More rounded corners */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); /* Deeper shadow for depth */
+  padding: 2rem; /* Spacing around content */
+  margin-top: 3rem; /* Space from top of the page */
+}
+
+h2 {
+  color: #333; /* Darker text for heading */
+  margin-bottom: 2rem;
+}
+
+input[type="text"],
+select,
+input[type="file"] {
+  width: 100%; /* Full width inputs */
+  padding: 12px; /* Internal padding */
+  margin-top: 0.5rem;
+  border: 1px solid #ced4da; /* Light gray border */
+  border-radius: 8px; /* Rounded input fields */
+  font-size: 1rem;
+  color: #4a4a4a; /* Text color */
+}
+
+input[type="text"]:focus,
+select:focus,
+input[type="file"]:focus {
+  border-color: #80bdff; /* Blue border on focus */
+  outline: none; /* Remove default outline */
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Subtle glow on focus */
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff; /* Blue background */
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+button[disabled] {
+  background-color: #ccc; /* Gray background for disabled state */
+  cursor: not-allowed; /* Disabled cursor */
+}
+
+/* Success and Error Message Styles */
+.alert {
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+  }
+}

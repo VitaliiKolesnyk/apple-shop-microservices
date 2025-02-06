@@ -1,0 +1,90 @@
+<div class="user-info-container">
+  <!-- Success/Error Message Display -->
+  <div *ngIf="message" class="alert" [ngClass]="{ 'success': isSuccess, 'error': !isSuccess }">
+    <div class="alert-icon">
+      <ng-container *ngIf="isSuccess">
+        <i class="fa fa-check-circle"></i> <!-- Success Icon -->
+      </ng-container>
+      <ng-container *ngIf="!isSuccess">
+        <i class="fa fa-times-circle"></i> <!-- Error Icon -->
+      </ng-container>
+    </div>
+    <div class="alert-message">
+      {{ message }}
+    </div>
+  </div>
+
+  <!-- User Info Update Form -->
+  <form *ngIf="user; else loading" (ngSubmit)="updateUser()">
+    <h3 class="section-title">Update Personal Information</h3>
+    <div class="user-detail">
+      <label for="username">Username:</label>
+      <input id="username" type="text" [(ngModel)]="user.username" name="username" required readonly />
+    </div>
+
+    <div class="user-detail">
+      <label for="firstName">First Name:</label>
+      <input id="firstName" type="text" [(ngModel)]="user.firstName" name="firstName" required />
+    </div>
+
+    <div class="user-detail">
+      <label for="lastName">Last Name:</label>
+      <input id="lastName" type="text" [(ngModel)]="user.lastName" name="lastName" required />
+    </div>
+
+    <div class="user-detail">
+      <label for="email">Email:</label>
+      <input id="email" type="email" [(ngModel)]="user.email" name="email" required />
+    </div>
+
+    <button type="submit" class="update-button">Update Information</button>
+  </form>
+
+  <!-- Add space between buttons -->
+  <div class="button-space"></div>
+
+  <!-- Manage Password Button -->
+  <div class="update-password-button-container">
+    <button class="manage-password-button" (click)="togglePasswordForm()">Manage Password</button>
+  </div>
+
+  <!-- Password Update Form (Initially hidden) -->
+  <form *ngIf="showPasswordForm && user" (ngSubmit)="updatePassword()">
+    <h3 class="section-title">Change Password</h3>
+
+    <!-- Password Requirements -->
+    <div class="password-requirements">
+      <p [ngStyle]="{'color': passwordConditions.length ? 'green' : 'red'}">
+        <span *ngIf="passwordConditions.length">✔</span>  At least 8 characters in length.
+      </p>
+      <p [ngStyle]="{'color': passwordConditions.uppercase ? 'green' : 'red'}">
+        <span *ngIf="passwordConditions.uppercase">✔</span>  Includes at least one uppercase letter.
+      </p>
+      <p [ngStyle]="{'color': passwordConditions.lowercase ? 'green' : 'red'}">
+        <span *ngIf="passwordConditions.lowercase">✔</span>  Includes at least one lowercase letter.
+      </p>
+      <p [ngStyle]="{'color': passwordConditions.number ? 'green' : 'red'}">
+        <span *ngIf="passwordConditions.number">✔</span>  Contains at least one number.
+      </p>
+      <p [ngStyle]="{'color': passwordConditions.special ? 'green' : 'red'}">
+        <span *ngIf="passwordConditions.special">✔</span>  Includes at least one special character (e.g., &, !, #, $).
+      </p>
+    </div>
+
+    <div class="user-detail">
+      <label for="password">New Password:</label>
+      <input id="password" type="password" [(ngModel)]="password" name="password" (input)="validatePassword()" required />
+    </div>
+
+    <div class="user-detail">
+      <label for="confirmPassword">Confirm Password:</label>
+      <input id="confirmPassword" type="password" [(ngModel)]="confirmPassword" name="confirmPassword" (input)="validatePassword()" required />
+    </div>
+
+    <button type="submit" class="update-button" [disabled]="!isPasswordValid">Update Password</button>
+  </form>
+
+  <ng-template #loading>
+    <p>Loading user information...</p>
+  </ng-template>
+</div>

@@ -1,0 +1,76 @@
+/* user-dashboard.component.css */
+.user-dashboard {
+  background-color: #f4f4f4; /* Light background color */
+  color: #333; /* Dark text color */
+  padding: 30px;
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+  animation: fadeIn 0.8s ease-out; /* Slower fade-in animation */
+  transform: scale(0.98);
+  transition: transform 0.3s ease-in-out;
+}
+
+.user-dashboard:hover {
+  transform: scale(1); /* Smooth scale-up on hover */
+}
+
+.navigation-buttons {
+  margin-bottom: 30px; /* Space below buttons */
+  display: flex;
+  gap: 20px; /* Space between buttons */
+  justify-content: center; /* Center buttons */
+}
+
+.nav-button {
+  background-color: #333; /* Dark button color */
+  color: white; /* White text color */
+  padding: 14px 24px; /* Padding for buttons */
+  border: none; /* No border */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Transition for hover effect */
+  font-size: 16px; /* Larger font size */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+.nav-button:hover {
+  background-color: #444; /* Darker shade on hover */
+  transform: translateY(-4px); /* Slight lift on hover */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+}
+
+.nav-button:active {
+  transform: translateY(0); /* Reset lift when clicked */
+}
+
+.new-message-icon {
+  color: red;
+  font-size: 1.2rem;
+  margin-left: 5px;
+  transition: transform 0.2s ease;
+}
+
+.new-message-icon:hover {
+  transform: scale(1.2); /* Slightly enlarge icon on hover */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .nav-button {
+    width: 100%; /* Full width on small screens */
+    margin-bottom: 10px; /* Space below buttons */
+  }
+}
+

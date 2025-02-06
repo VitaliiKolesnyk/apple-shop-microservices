@@ -1,0 +1,36 @@
+<div class="container mx-auto p-6 bg-white rounded-lg shadow-xl">
+  <h2 class="text-4xl font-bold mb-8 text-black text-center">Categories</h2>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert-error mb-6">
+    <strong>Error:</strong> {{ errorMessage }}
+  </div>
+
+  <!-- Create Button -->
+  <div class="flex justify-end mb-8">
+    <button *ngIf="isAuthenticated && hasAdminRole()"
+            class="btn-create"
+            (click)="goToCreateCategoryPage()">
+      <i class="bi bi-plus-circle"></i> Create Category
+    </button>
+  </div>
+
+  <!-- Main Categories -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+    <div *ngFor="let category of categories" class="card">
+      <a [routerLink]="['/category-details/' + category.id]" class="no-underline">
+        <img [src]="category.thumbnailUrl" alt="{{ category.name }}" class="category-image" />
+      </a>
+      <h3 class="category-name">{{ category.name }}</h3>
+
+      <!-- Delete Button for Admins -->
+      <div *ngIf="isAuthenticated && hasAdminRole()">
+        <button class="btn-delete" (click)="deleteCategory(category.id)">
+          <i class="bi bi-trash"></i> Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <p *ngIf="categories.length === 0" class="text-gray-500 text-center mt-6">No categories found.</p>
+</div>

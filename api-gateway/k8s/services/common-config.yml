@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: common-config
+data:
+  LOKI_URL: "http://loki:3100/loki/api/v1/push"
+  MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: "http://tempo:9411"
+  PRODUCT_SERVICE_URL: "http://product-service:8080"
+  ORDER_SERVICE_URL: "http://order-service:8081"
+  INVENTORY_SERVICE_URL: "http://inventory-service:8082"
+  PAYMENT_SERVICE_URL: "http://payment-service:8084"
+  USER_SERVICE_URL: "http://user-service:8085"
+  NOTIFICATION_SERVICE_URL: "http://notification-service:8083"
+  SPRING_KAFKA_BOOTSTRAP-SERVERS: "kafka-0.broker.default.svc.cluster.local:29092,kafka-1.broker.default.svc.cluster.local:29092,kafka-2.broker.default.svc.cluster.local:29092"
+

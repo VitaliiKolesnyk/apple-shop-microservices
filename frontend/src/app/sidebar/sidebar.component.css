@@ -1,0 +1,69 @@
+
+.active {
+  background-color: #4CAF50;
+}
+
+.sidebar {
+  position: relative;
+  z-index: 1000; /* Higher value to bring it in front of other elements */
+}
+
+.subcategory-list {
+  padding-left: 15px;
+  list-style-type: none;
+}
+
+.sidebar {
+  background-color: #111111;
+  transition: width 0.3s ease-in-out, background-color 0.3s ease;
+  width: 256px;
+  overflow-x: hidden;
+}
+
+.sidebar:hover {
+  width: 280px; /* Slightly expand on hover */
+  background-color: #181818;
+}
+
+.sidebar h2 {
+  font-weight: bold;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.sidebar a {
+  position: relative;
+  color: #b0b0b0; /* Subtle text color */
+}
+
+.sidebar a:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar a svg {
+  color: #777777; /* Subtle icon color */
+}
+
+.sidebar a:hover svg {
+  color: #ffffff; /* Brighten icon color on hover */
+}
+
+.sidebar a::before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 3px;
+  background-color: transparent;
+  top: 0;
+  left: 0;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar a:hover::before {
+  background-color: #ffffff; /* Vertical line on hover */
+}
+
+

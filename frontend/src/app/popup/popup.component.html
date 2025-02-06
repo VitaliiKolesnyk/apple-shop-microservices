@@ -1,0 +1,8 @@
+<div class="popup-overlay" [ngClass]="{ 'active': isActive }" (click)="closePopup()">
+  <div class="popup-content" [ngClass]="{ 'active': isActive }" (click)="$event.stopPropagation()">
+    <button class="close-button" (click)="closePopup()">✖</button>
+    <h2 class="popup-title">{{ title }}</h2>
+    <p class="popup-message">{{ message }}</p>
+    <button class="confirm-button" (click)="closePopup()">Okay</button>
+  </div>
+</div>

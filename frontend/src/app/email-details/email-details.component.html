@@ -1,0 +1,50 @@
+<div class="email-details">
+  <h1 class="header">Request Details</h1>
+
+  <div class="email-info card">
+    <div class="info-item">
+      <label>Subject:</label>
+      <span>{{ message?.subject }}</span>
+    </div>
+    <div class="info-item">
+      <label>Email:</label>
+      <span>{{ message?.email }}</span>
+    </div>
+  </div>
+
+  <!-- Success Message -->
+  <div *ngIf="closeSuccessMessage" class="success-message">
+    <strong>Success:</strong> The request has been successfully closed.
+  </div>
+
+  <!-- Close Button -->
+  <div class="close-btn-container" *ngIf="message && message?.status === 'OPEN'">
+    <button class="delete-btn" (click)="updateStatus(message.id, 'CLOSED')">Close</button>
+  </div>
+
+  <div class="conversation-block card">
+    <h2>Conversation</h2>
+
+    <!-- Original Message Body as the first message -->
+    <div class="message-item right-align">
+      <span class="sender-email">{{ message?.email }}</span>
+      <p class="message-body">{{ message?.body }}</p>
+      <span class="message-timestamp"><strong></strong> {{ message?.timestamp | date: 'short' }}</span>
+    </div>
+
+    <!-- Replies Section -->
+    <div *ngFor="let reply of message?.replies" class="message-item"
+         [ngClass]="{'right-align': reply?.emailStatus === 'CUSTOMER_REPLIED', 'left-align': reply?.emailStatus === 'ADMIN_REPLIED'}">
+      <span class="sender-email" *ngIf="reply?.emailStatus === 'ADMIN_REPLIED'">AppleShop</span>
+      <span class="sender-email" *ngIf="reply?.emailStatus === 'CUSTOMER_REPLIED'">{{ userEmail }}</span>
+      <p class="message-body">{{ reply.body }}</p>
+      <span class="message-timestamp"><strong></strong> {{ reply.timestamp | date: 'short' }}</span>
+    </div>
+  </div>
+
+  <!-- Reply Form -->
+  <div *ngIf="message?.status === 'OPEN'" class="reply-form card">
+    <textarea [(ngModel)]="replyText" placeholder="Type your reply" class="reply-textarea"></textarea>
+    <button class="btn-send" (click)="sendReply()">Send Reply</button>
+  </div>
+</div>

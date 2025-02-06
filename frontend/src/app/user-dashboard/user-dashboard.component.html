@@ -1,0 +1,17 @@
+<div class="user-dashboard">
+  <!-- Navigation Buttons -->
+  <div class="navigation-buttons flex space-x-4">
+    <button [routerLink]="['/user-dashboard/user-info']" class="nav-button">Personal Information</button>
+    <button *ngIf="hasUserRole()" [routerLink]="['/user-dashboard/user-orders']" class="nav-button">My Orders</button>
+    <button *ngIf="hasUserRole()" [routerLink]="['/user-dashboard/contact-panel']" class="nav-button flex items-center">
+      Support
+      <!-- New Message Icon (conditional display) -->
+      <svg *ngIf="hasNewMessage" class="w-5 h-5 text-red-500 ml-2 transition-transform transform hover:scale-110" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.5 5 7.5-5m-15 0l7.5 5 7.5-5M21 8v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Router Outlet to display the selected component -->
+  <router-outlet></router-outlet>
+</div>

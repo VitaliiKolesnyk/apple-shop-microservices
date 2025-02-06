@@ -1,0 +1,87 @@
+<div class="container mx-auto p-6 bg-white rounded-lg shadow-lg">
+  <h2 class="text-3xl font-bold mb-4 text-black text-center">Your Orders</h2>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="bg-red-100 text-red-600 border border-red-200 p-3 rounded mb-6 text-center">
+    <strong>Error:</strong> {{ errorMessage }}
+  </div>
+
+  <!-- Search & Filters -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+    <div class="flex flex-col">
+      <label for="orderNumber" class="text-lg font-medium text-black mb-1">Search by Order Number</label>
+      <input type="text" id="orderNumber" [(ngModel)]="orderNumber" class="form-input" placeholder="Enter order number">
+      <button class="btn-search mt-2" (click)="searchOrderNumber()">Search</button>
+    </div>
+
+    <div class="flex flex-col">
+      <label for="statusFilter" class="text-lg font-medium text-black mb-1">Status</label>
+      <select id="statusFilter" [(ngModel)]="selectedStatus" (change)="filterOrders()" class="form-select">
+        <option value="">All</option>
+        <option value="NEW">NEW</option>
+        <option value="PAID">PAID</option>
+        <option value="DELIVERED">DELIVERED</option>
+        <option value="CANCELLED">CANCELLED</option>
+      </select>
+    </div>
+
+    <div class="flex flex-col">
+      <label for="startDate" class="text-lg font-medium text-black mb-1">Start Date</label>
+      <input type="date" id="startDate" [(ngModel)]="startDate" (change)="filterOrders()" class="form-input">
+    </div>
+
+    <div class="flex flex-col">
+      <label for="endDate" class="text-lg font-medium text-black mb-1">End Date</label>
+      <input type="date" id="endDate" [(ngModel)]="endDate" (change)="filterOrders()" class="form-input">
+    </div>
+  </div>
+
+  <!-- Orders Table -->
+  <div class="overflow-x-auto">
+    <table class="min-w-full table-auto border-collapse bg-white rounded-lg shadow-lg">
+      <thead>
+      <tr class="bg-gray-200 text-left">
+        <th class="p-4 font-medium text-black">Order #</th>
+        <th class="p-4 font-medium text-black">Status</th>
+        <th class="p-4 font-medium text-black">Items</th>
+        <th class="p-4 font-medium text-black">Total</th>
+        <th class="p-4 font-medium text-black">Ordered At</th>
+        <th class="p-4 font-medium text-black"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let order of paginatedOrders" (click)="openOrderDetails(order.id)" class="hover:bg-gray-50 transition-colors cursor-pointer">
+        <td class="p-4 text-gray-800 font-semibold">#{{ order.orderNumber }}</td>
+        <td class="p-4">
+            <span class="status-badge" [ngClass]="statusClasses(order.status)">
+              {{ order.status }}
+            </span>
+        </td>
+        <td class="p-4 text-gray-600">{{ order.quantity }}</td>
+        <td class="p-4 text-gray-600">${{ order.totalAmount | number: '1.2-2' }}</td>
+        <td class="p-4 text-gray-600">{{ order.orderedAt | date: 'short' }}</td> <!-- Display orderedAt date -->
+        <td class="p-4 flex space-x-2">
+          <select [(ngModel)]="order.newStatus" class="form-select" (click)="$event.stopPropagation()">
+            <option value="NEW">NEW</option>
+            <option value="NEW">PAID</option>
+            <option value="DELIVERED">DELIVERED</option>
+            <option value="CANCELLED">CANCELLED</option>
+          </select>
+          <button class="btn-update" (click)="$event.stopPropagation(); updateOrderStatus(order)">Update</button>
+          <button class="btn-delete ml-2" (click)="$event.stopPropagation(); deleteOrder(order.id)">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div *ngIf="filteredOrders.length > 0" class="flex justify-center mt-6">
+    <button class="btn-pagination" [disabled]="currentPage === 1" (click)="prevPage()">‹</button>
+    <span class="mx-2 text-black">Page {{ currentPage }} of {{ totalPages }}</span>
+    <button class="btn-pagination" [disabled]="currentPage === totalPages" (click)="nextPage()">›</button>
+  </div>
+
+  <!-- No Orders Message -->
+  <p *ngIf="filteredOrders.length === 0" class="text-gray-400 text-center mt-4">No orders found.</p>
+</div>

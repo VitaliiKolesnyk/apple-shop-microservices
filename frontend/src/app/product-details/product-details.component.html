@@ -1,0 +1,96 @@
+<div class="product-details-container">
+  <div class="product-image">
+    <img [src]="product?.thumbnailUrl" alt="{{ product?.name }}" />
+  </div>
+
+  <!-- Admin Edit Fields -->
+  <ng-container *ngIf="product && hasAdminRole()">
+    <div class="admin-section">
+      <h2>Edit Product</h2>
+
+      <div class="admin-field">
+        <label for="thumbnail">Thumbnail:</label>
+        <input id="thumbnail" type="file" (change)="onFileSelected($event)" />
+      </div>
+
+      <div class="admin-field">
+        <label for="name">Name:</label>
+        <input id="name" type="text" [(ngModel)]="product.name" />
+      </div>
+
+      <div class="admin-field">
+        <label for="description">Description:</label>
+        <textarea id="description" [(ngModel)]="product.description"></textarea>
+      </div>
+
+      <div class="admin-field">
+        <label for="price">Price:</label>
+        <input id="price" type="number" [(ngModel)]="product.price" />
+      </div>
+
+      <button class="btn-primary" (click)="updateProduct(product.id)">Update Product</button>
+    </div>
+  </ng-container>
+
+  <!-- Display Fields for non-admins -->
+  <ng-container *ngIf="!hasAdminRole() || !isAuthenticated">
+    <h1 class="product-name">{{ product?.name }}</h1>
+    <p class="product-description">{{ product?.description }}</p>
+    <div class="product-price">
+      <span class="price">${{ product?.price?.toFixed(2) }}</span>
+    </div>
+
+    <button class="btn-primary add-to-cart-btn" (click)="addToCart(product?.id)">Add to Cart</button>
+  </ng-container>
+
+  <!-- Toggle Comments Button -->
+  <button class="btn-outline toggle-comments-btn" (click)="toggleComments()">
+    {{ commentsVisible ? 'Hide Comments' : 'Show Comments' }}
+  </button>
+
+  <!-- Comments Section -->
+  <div class="comments-section" *ngIf="commentsVisible">
+    <h2>Comments</h2>
+
+    <!-- Display comments -->
+    <div *ngFor="let comment of comments; trackBy: trackByCommentId" class="comment-box">
+      <p><strong>{{ comment.author }}:</strong> {{ comment.text }}</p>
+      <p class="comment-date">{{ comment.createdAt | date: 'medium' }}</p>
+
+      <!-- Replies for the comment -->
+      <div *ngIf="comment.replies?.length" class="replies">
+        <div *ngFor="let reply of comment.replies" class="reply-box">
+          <p><strong>{{ reply.author }}:</strong> {{ reply.text }}</p>
+          <p class="comment-date">{{ reply.createdAt | date: 'medium' }}</p>
+        </div>
+      </div>
+
+      <!-- Reply form -->
+      <div *ngIf="isAuthenticated" class="reply-form">
+        <textarea [(ngModel)]="replyText" placeholder="Reply"></textarea>
+        <button class="btn-outline reply-btn" (click)="addReply(comment.id)">Reply</button>
+      </div>
+
+      <!-- Admin-only delete functionality -->
+      <button *ngIf="hasAdminRole()" class="btn-danger delete-button" (click)="deleteComment(comment.id)">Delete</button>
+    </div>
+
+    <!-- Add New Comment -->
+    <div *ngIf="isAuthenticated" class="new-comment">
+      <textarea [(ngModel)]="newCommentText" placeholder="Add a comment"></textarea>
+      <button class="btn-outline add-comment-btn" (click)="addComment()">Submit</button>
+    </div>
+
+    <div *ngIf="!isAuthenticated">
+      <p>Please log in to add comments.</p>
+    </div>
+  </div>
+
+  <!-- Success and Error Messages -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+</div>

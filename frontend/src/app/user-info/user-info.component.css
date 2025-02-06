@@ -1,0 +1,202 @@
+/* Body and overall theme */
+body {
+  background-color: #fff;
+  color: #000;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* User info container */
+.user-info-container {
+  padding: 30px;
+  border: 1px solid #ddd;  /* Light grey border */
+  border-radius: 8px;
+  background-color: #fafafa;  /* Very light grey background */
+  max-width: 600px;
+  margin: 40px auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.user-info-container:hover {
+  transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+/* Success/Error message styles */
+.alert {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  transition: opacity 0.5s ease-out;
+}
+
+.success {
+  background-color: #28a745; /* Green */
+  color: #fff;
+  border: 1px solid #28a745;
+}
+
+.error {
+  background-color: #dc3545; /* Red */
+  color: #fff;
+  border: 1px solid #dc3545;
+}
+
+.alert-icon {
+  margin-right: 15px;
+}
+
+.alert-message {
+  flex: 1;
+}
+
+/* Section Title */
+.section-title {
+  font-size: 1.6em;
+  font-weight: bold;
+  color: #000;
+  margin: 20px 0 10px;
+  border-bottom: 2px solid #000;
+  padding-bottom: 5px;
+}
+
+/* User detail fields */
+.user-detail {
+  margin-bottom: 20px;
+}
+
+.user-detail label {
+  display: block;
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #000;
+  font-size: 1em;
+  transition: border-color 0.3s ease-in-out;
+}
+
+input:focus {
+  border-color: #000; /* Focused input will have a black border */
+  outline: none;
+}
+
+.manage-password-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.manage-password-button:hover {
+  background-color: white;
+  color: black;
+}
+
+.update-password-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.password-requirements {
+  font-size: 14px;
+  margin-bottom: 15px;
+  list-style: none;
+  padding-left: 0;
+}
+
+.password-requirements p {
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+}
+
+.password-requirements p .check-icon {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.password-requirements p.green {
+  color: green;
+}
+
+.password-requirements p.red {
+  color: red;
+}
+
+/* Alert animation */
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.alert.ng-enter, .alert.ng-leave {
+  opacity: 0;
+}
+
+.alert.ng-enter-active, .alert.ng-leave-active {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+input, .update-button {
+  font-size: 1.1em;
+}
+
+@media (max-width: 768px) {
+  .user-info-container {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .section-title {
+    font-size: 1.4em;
+  }
+}
+
+/* Update Button Styles */
+.update-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: white; /* White background */
+  color: black; /* Black text */
+  border: 2px solid black; /* Black borders */
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.update-button:hover {
+  background-color: black;
+  color: white;
+  border-color: black;
+}
+
+.update-button:disabled {
+  background-color: lightgray;
+  color: white;
+  border-color: black;
+  cursor: not-allowed;
+}

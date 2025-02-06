@@ -1,0 +1,56 @@
+<div class="container mx-auto p-6 max-w-4xl">
+  <h2 class="text-2xl font-semibold mb-6 text-gray-900">Orders</h2>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="bg-red-100 text-red-700 px-4 py-3 rounded mb-6">
+    <strong>Error:</strong> {{ errorMessage }}
+  </div>
+
+  <!-- Status Filter -->
+  <div class="flex justify-between items-center mb-6 p-4 bg-gray-50 rounded-lg shadow-md">
+    <label for="statusFilter" class="text-sm font-medium text-gray-700">Filter by Status</label>
+    <select id="statusFilter" [(ngModel)]="selectedStatus" (change)="filterOrders()" class="border border-gray-300 rounded-lg px-4 py-2 text-gray-600">
+      <option value="">All</option>
+      <option value="NEW">NEW</option>
+      <option value="DELIVERED">DELIVERED</option>
+      <option value="CANCELLED">CANCELLED</option>
+    </select>
+  </div>
+
+  <!-- Orders List -->
+  <div *ngFor="let order of paginatedOrders"
+       class="border rounded-lg shadow-sm p-4 mb-4 bg-white transition-transform transform hover:scale-105 cursor-pointer"
+       (click)="openOrderDetails(order.id)">
+    <div class="flex justify-between items-center mb-2">
+      <h3 class="text-lg font-medium text-gray-700">Order #{{ order.orderNumber }}</h3>
+      <span class="px-2 py-1 rounded-full text-xs font-semibold"
+            [ngClass]="{
+                    'bg-green-100 text-green-800': order.status === 'NEW',
+                    'bg-yellow-100 text-yellow-800': order.status === 'DELIVERED',
+                    'bg-red-100 text-red-800': order.status === 'CANCELLED'
+                }">{{ order.status }}
+      </span>
+    </div>
+    <p class="text-sm text-gray-600"><strong>Items:</strong> {{ order.quantity }}</p>
+    <p class="text-sm text-gray-600"><strong>Total:</strong> ${{ order.totalAmount | number: '1.2-2' }}</p>
+
+    <div class="flex justify-end items-center mt-4">
+      <!-- Cancel Order button with updated design -->
+      <button *ngIf="order.status !== 'CANCELLED'"
+              class="text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 rounded-lg py-2 px-4 transition-colors"
+              (click)="cancellOrder(order); $event.stopPropagation()">
+        Cancel Order
+      </button>
+    </div>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div *ngIf="filteredOrders.length > 0" class="flex justify-center items-center mt-6">
+    <button class="text-gray-500 hover:text-gray-600 px-3 py-1 rounded" [disabled]="currentPage === 1" (click)="prevPage()">Previous</button>
+    <span class="mx-4 text-gray-600">Page {{ currentPage }} of {{ totalPages }}</span>
+    <button class="text-gray-500 hover:text-gray-600 px-3 py-1 rounded" [disabled]="currentPage === totalPages" (click)="nextPage()">Next</button>
+  </div>
+
+  <!-- No Orders Message -->
+  <p *ngIf="filteredOrders.length === 0" class="text-center text-gray-500 mt-8">No orders found.</p>
+</div>
