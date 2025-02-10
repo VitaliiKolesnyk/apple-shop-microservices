@@ -23,5 +23,7 @@ public interface ProductService {
 
     Product getProductById(String id);
 
+    String getThumbnailUrl(String productId);
+
     ProductResponse updateProduct(String id, String name, String description, double price, MultipartFile thumbnail) throws ExecutionException, InterruptedException;
 }

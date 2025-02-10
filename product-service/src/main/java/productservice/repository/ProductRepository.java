@@ -15,6 +15,8 @@ public interface ProductRepository extends MongoRepository<Product, String> {
 
     Page<Product> findByCategoriesIn(List<String> categories, Pageable pageable);
 
+    List<Product> findByCategoriesIn(List<String> categories);
+
     Page<Product> findAllByNameContainingIgnoreCase(String name, Pageable pageable);
 
     boolean existsProductsBySkuCode(String skuCode);

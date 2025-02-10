@@ -86,4 +86,22 @@ public class ProductController {
                                          @RequestParam(value = "thumbnail", required = false) MultipartFile thumbnail) throws ExecutionException, InterruptedException {
         return productService.updateProduct(productId, name, description, price, thumbnail);
     }
+
+    @GetMapping("/images")
+    public ResponseEntity<byte[]> getFile(@RequestParam(required = false) String productId, @RequestParam(required = false) String key) {
+        if (productId != null) {
+            key = productService.getThumbnailUrl(productId);
+        }
+
+        byte[] fileBytes = fileService.getFileBytes(key);
+
+        String contentType = fileService.getFileContentType(key)
+                .orElse("application/octet-stream");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + key);
+        headers.add(HttpHeaders.CONTENT_TYPE, contentType);
+
+        return new ResponseEntity<>(fileBytes, headers, HttpStatus.OK);
+    }
 }

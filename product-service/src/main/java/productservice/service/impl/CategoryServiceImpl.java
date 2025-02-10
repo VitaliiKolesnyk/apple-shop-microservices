@@ -1,15 +1,19 @@
-package productservice.service.impl;
+package org.productservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.productservice.dto.category.CategoryResponse;
 import org.productservice.entity.Category;
+import org.productservice.entity.Product;
 import org.productservice.repository.CategoryRepository;
+import org.productservice.repository.ProductRepository;
 import org.productservice.service.CategoryService;
 import org.productservice.service.FileService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -22,10 +26,15 @@ import java.util.stream.Collectors;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
+
+    private final ProductRepository productRepository;
+
     private final FileService fileService;
 
+    private final RedisTemplate<String, Object> redisTemplate;
+
     @Override
-    @Cacheable(value = "categories")
+    @Cacheable(value = "categories", key = "'all_categories'")
     public List<CategoryResponse> findAll() {
         log.info("Fetching all categories from the database.");
 
@@ -133,6 +142,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     @CacheEvict(value = "categories", allEntries = true)
     public void deleteCategory(String categoryId) {
         log.info("Deleting category with ID: {}", categoryId);
@@ -142,15 +152,22 @@ public class CategoryServiceImpl implements CategoryService {
 
         if (category != null) {
             if (category.isMain()) {
-                // Top-level category, delete directly
                 categoryRepository.delete(category);
+
                 fileService.deleteFile(category.getThumbnailUrl());
+
+                excludeCategoryFromProduct(categoryId, true);
                 log.info("Successfully deleted top-level category with ID: {}", categoryId);
             }
         } else {
             // If not found as a top-level category, search through all categories for the subcategory
             List<Category> categories = categoryRepository.findAll();
             Category topParentCategory = findTopParentCategory(categories, categoryId);
+
+            if (topParentCategory == null) {
+                log.warn("Top parent category with ID {} not found", categoryId);
+                return;
+            }
 
             boolean removed = removeSubcategoryRecursive(topParentCategory, categoryId);
 
@@ -169,15 +186,15 @@ public class CategoryServiceImpl implements CategoryService {
         // Look for the subcategory in the parent's subcategories
         for (Category subcategory : parentCategory.getSubcategories()) {
             if (subcategory.getId().equals(subcategoryId)) {
-                // Remove the subcategory and its thumbnail file
                 log.info("Before deletion - " + parentCategory.getSubcategories().size());
 
                 parentCategory.getSubcategories().remove(subcategory);
 
                 log.info("After deletion - " + parentCategory.getSubcategories().size());
 
-                fileService.deleteFile(subcategory.getThumbnailUrl());
-                return true;  // Successfully removed
+                excludeCategoryFromProduct(subcategory.getId(), false);
+
+                return true;
             }
         }
 
@@ -189,6 +206,35 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         return false;  // Subcategory not found in this branch of the tree
+    }
+
+    private void excludeCategoryFromProduct(String categoryId, boolean isMainCategory) {
+        log.info("Start - Excluding category with ID: {} from products", categoryId);
+
+        List<Product> products = productRepository.findByCategoriesIn(List.of(categoryId));
+
+        log.info("Found {} products containing category ID: {}", products.size(), categoryId);
+
+        products.forEach(product -> {
+            log.info("Processing product with ID: {}", product.getId());
+
+            if (isMainCategory) {
+                product.getCategories().clear();
+
+                productRepository.delete(product);
+
+                redisTemplate.delete(product.getId());
+            } else {
+                product.getCategories().remove(categoryId);
+
+                log.info("Category ID: {} removed from product ID: {}", categoryId, product.getId());
+
+                productRepository.save(product);
+                log.info("Product ID: {} updated with remaining categories: {}", product.getId(), product.getCategories());
+            }
+        });
+
+        log.info("End - Finished excluding category with ID: {}", categoryId);
     }
 
     @Override
@@ -280,5 +326,14 @@ public class CategoryServiceImpl implements CategoryService {
                         .map(this::mapToCategoryResponse)
                         .collect(Collectors.toList())
         );
+    }
+
+    public String getThumbnailUrl(String categoryId) {
+        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> {
+            log.error("Category not found with ID: {}", categoryId);
+            return new RuntimeException("Category not found");
+        });
+
+        return category.getThumbnailUrl();
     }
 }
