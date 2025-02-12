@@ -20,4 +20,6 @@ public interface CartService {
     BigDecimal getCartTotalPrice(String userId);
 
     Integer getCartTotalQuantity(String userId);
+
+    void processExpiredCart(Cart cart);
 }

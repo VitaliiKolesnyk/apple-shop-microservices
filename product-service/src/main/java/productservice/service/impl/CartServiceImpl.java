@@ -14,6 +14,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -165,5 +166,15 @@ public class CartServiceImpl implements CartService {
 
     private void updateExpirationDate(Cart cart) {
         cart.setExpirationDate(LocalDateTime.now().plusHours(EXPIRATION_HOURS_QUANTITY));
+    }
+
+    @Transactional
+    public void processExpiredCart(Cart cart) {
+        String redisKey = "cart:" + cart.getUserId();
+        redisTemplate.delete(redisKey);
+        log.info("Cache cleared for cart with userId: {}", cart.getUserId());
+
+        cartRepository.delete(cart);
+        log.info("Cart with userId: {} deleted from MongoDB", cart.getUserId());
     }
 }

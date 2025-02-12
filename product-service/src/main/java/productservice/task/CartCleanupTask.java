@@ -9,6 +9,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import productservice.service.CartService;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,6 +21,8 @@ import java.util.concurrent.TimeUnit;
 public class CartCleanupTask {
 
     private final CartRepository cartRepository;
+
+    private final CartService cartService;
 
     private final RedisTemplate<String, Object> redisTemplate;
 
@@ -43,17 +46,7 @@ public class CartCleanupTask {
         LocalDateTime now = LocalDateTime.now();
         List<Cart> expiredCarts = cartRepository.findByExpirationDateBefore(now);
 
-        expiredCarts.forEach(this::processExpiredCart);
-    }
-
-    @Transactional
-    public void processExpiredCart(Cart cart) {
-        String redisKey = "cart:" + cart.getUserId();
-        redisTemplate.delete(redisKey);
-        log.info("Cache cleared for cart with userId: {}", cart.getUserId());
-
-        cartRepository.delete(cart);
-        log.info("Cart with userId: {} deleted from MongoDB", cart.getUserId());
+        expiredCarts.forEach(cartService::processExpiredCart);
     }
 
     private boolean acquireLeadership() {
