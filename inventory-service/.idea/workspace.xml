@@ -4,15 +4,126 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14a24772-d329-4ea3-910d-a0249d05805b" name="Changes" comment="" />
+    <list default="true" id="14a24772-d329-4ea3-910d-a0249d05805b" name="Changes" comment="Correction">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/OrderServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/OrderServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/client/InventoryClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/client/InventoryClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/config/KafkaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/config/KafkaConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/config/ObservabilityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/config/ObservabilityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/config/OpenAPIConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/config/OpenAPIConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/config/RedisConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/config/RestClientConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/config/RestClientConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/dto/ContactDetailsRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/dto/ContactDetailsRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/dto/ContactDetailsResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/dto/ContactDetailsResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/dto/Error.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/dto/Error.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/dto/OrderRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/dto/OrderRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/dto/OrderResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/dto/OrderResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/dto/ProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/dto/ProductDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/dto/ReserveProductsRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/dto/ReserveProductsRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/dto/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/dto/Status.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/dto/UserDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/dto/UserDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/entity/ContactDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/entity/ContactDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/entity/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/entity/OrderProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/entity/OrderProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/entity/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/event/OrderCancelEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/event/OrderCancelEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/event/OrderEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/event/OrderEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/event/PaymentEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/event/PaymentEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/event/ProductEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/event/ProductEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/exception/NotInStockException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/exception/NotInStockException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/exception/OrderControllerAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/exception/OrderControllerAdvice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/mapper/ContactDetailsMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/mapper/ContactDetailsMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/mapper/OrderMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/mapper/OrderMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/mapper/ProductMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/mapper/ProductMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/mapper/impl/ContactDetailsMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/mapper/impl/ContactDetailsMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/mapper/impl/OrderMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/mapper/impl/OrderMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/mapper/impl/ProductMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/mapper/impl/ProductMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/repository/ContactDetailsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/repository/ContactDetailsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/repository/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/service/EventHandleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/service/EventHandleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/service/ProducerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/service/ProducerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/service/impl/EventHandleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/service/impl/EventHandleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/service/impl/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/service/impl/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/service/kafka/KafkaProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/service/kafka/KafkaProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/service/kafka/OrderCancelEventConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/service/kafka/OrderCancelEventConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/service/kafka/PaymentEventConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/service/kafka/PaymentEventConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/service/kafka/ProductEventConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/service/kafka/ProductEventConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/java/orderservice/task/SendNotPaidNotificationEventToKafkaTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/../order-service/src/main/java/org/service/orderservice/task/SendNotPaidNotificationEventToKafkaTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/OrderServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/client/InventoryClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/config/KafkaConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/config/ObservabilityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/config/OpenAPIConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/config/RedisConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/config/RestClientConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/controller/OrderController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/dto/ContactDetailsRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/dto/ContactDetailsResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/dto/Error.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/dto/OrderRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/dto/OrderResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/dto/ProductDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/dto/ReserveProductsRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/dto/Status.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/dto/UserDetails.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/entity/ContactDetails.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/entity/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/entity/OrderProduct.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/entity/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/event/OrderCancelEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/event/OrderEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/event/PaymentEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/event/ProductEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/exception/NotInStockException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/exception/OrderControllerAdvice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/mapper/ContactDetailsMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/mapper/OrderMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/mapper/ProductMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/mapper/impl/ContactDetailsMapperImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/mapper/impl/OrderMapperImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/mapper/impl/ProductMapperImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/repository/ContactDetailsRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/repository/OrderRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/repository/ProductRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/service/EventHandleService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/service/OrderService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/service/ProducerService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/service/impl/EventHandleServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/service/impl/OrderServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/service/kafka/KafkaProducer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/service/kafka/OrderCancelEventConsumer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/service/kafka/PaymentEventConsumer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/service/kafka/ProductEventConsumer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../order-service/src/main/resources/orderservice/task/SendNotPaidNotificationEventToKafkaTask.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../product-service/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../product-service/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "VitaliiKolesnyk"
+  }
 }]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/VitaliiKolesnyk/apple-shop-microservices.git",
+    "accountId": "2f78779b-cd7b-4653-8c69-ee38bd17a3af"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2sfdGJTTTojEkGkHb8BSHsIOruT" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -21,8 +132,14 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Vitalii/IdeaProjects/apple-shop-microservices/inventory-service",
+    "last_opened_file_path": "C:/Users/Vitalii/IdeaProjects/apple-shop-microservices/order-service",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -33,6 +150,15 @@
       <recent name="C:\Users\Vitalii\IdeaProjects\apple-shop-microservices\inventory-service\src\main\resources" />
       <recent name="C:\Users\Vitalii\IdeaProjects\apple-shop-microservices\inventory-service\src\main\java" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="InventoryServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="inventory-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="inventoryservice.InventoryServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -51,10 +177,24 @@
       <option name="presentableId" value="Default" />
       <updated>1738850467494</updated>
       <workItem from="1738850468731" duration="77000" />
+      <workItem from="1739367750039" duration="949000" />
     </task>
+    <task id="LOCAL-00001" summary="Correction">
+      <option name="closed" value="true" />
+      <created>1739368219222</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739368219223</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Correction" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correction" />
   </component>
 </project>
