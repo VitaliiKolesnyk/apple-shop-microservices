@@ -171,10 +171,11 @@ public class CartServiceImpl implements CartService {
     @Transactional
     public void processExpiredCart(Cart cart) {
         String redisKey = "cart:" + cart.getUserId();
-        redisTemplate.delete(redisKey);
-        log.info("Cache cleared for cart with userId: {}", cart.getUserId());
 
         cartRepository.delete(cart);
         log.info("Cart with userId: {} deleted from MongoDB", cart.getUserId());
+
+        redisTemplate.delete(redisKey);
+        log.info("Cache cleared for cart with userId: {}", cart.getUserId());
     }
 }
