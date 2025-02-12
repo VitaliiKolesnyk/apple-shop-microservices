@@ -52,7 +52,7 @@ public class SendNotPaidNotificationEventToKafkaTask {
 
     private boolean acquireLeadership() {
         String lockKey = "not_paid-notification-leader-election-lock";
-        Boolean isLeader = redisTemplate.opsForValue().setIfAbsent(lockKey, new Object(), 110, TimeUnit.SECONDS);
+        Boolean isLeader = redisTemplate.opsForValue().setIfAbsent(lockKey, "lock", 110, TimeUnit.SECONDS);
 
         log.info("Leadership acquiring result - {}", isLeader);
 
