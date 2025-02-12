@@ -20,7 +20,6 @@ public class ExclusiveProductReservationServiceImpl implements ExclusiveInventor
 
     private final ExclusiveProductRepository productRepository;
 
-    @Transactional
     public boolean reserveProduct(String skuCode) {
         if (reservationService.isProductReserved(skuCode)) {
             log.warn("Product {} already reserved.", skuCode);
@@ -44,7 +43,6 @@ public class ExclusiveProductReservationServiceImpl implements ExclusiveInventor
         return reservationService.reserveProduct(product.getSkuCode());
     }
 
-    @Transactional
     public boolean processProductAfterPayment(String skuCode) {
         log.info("Processing exclusive product with SKU {}", skuCode);
 
@@ -64,7 +62,8 @@ public class ExclusiveProductReservationServiceImpl implements ExclusiveInventor
         return true;
     }
 
-    private void completePurchase(ExclusiveProduct exclusiveProduct) {
+    @Transactional
+    public void completePurchase(ExclusiveProduct exclusiveProduct) {
         reservationService.releaseProduct(exclusiveProduct.getSkuCode());
 
         exclusiveProduct.setAvailable(false);

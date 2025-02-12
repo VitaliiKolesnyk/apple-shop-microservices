@@ -14,6 +14,7 @@ import org.service.inventoryservice.repository.ProductReservationRepository;
 import org.service.inventoryservice.service.EventHandleService;
 import org.service.inventoryservice.service.ExclusiveInventoryReservationService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -49,6 +50,7 @@ public class EventHandleServiceImpl implements EventHandleService {
         }
     }
 
+    @Transactional
     private void saveInventory(ProductEvent productEvent) {
         log.info("Saving new inventory for product {}", productEvent.skuCode());
 
@@ -101,6 +103,7 @@ public class EventHandleServiceImpl implements EventHandleService {
     }
 
     @Override
+    @Transactional
     public void handlePaymentEvent(PaymentEvent paymentEvent) {
         log.info("Got Message from payment-events topic {}", paymentEvent);
 

@@ -43,7 +43,6 @@ public class ProductReservationServiceImpl implements ProductReservationService 
 
     private final ExclusiveInventoryReservationService exclusiveInventoryReservationService;
 
-    @Transactional
     @Override
     public boolean reserveInventory(ReserveRequest reserveRequest) {
         log.info("Reserving inventory for order {}", reserveRequest.orderNumber());
@@ -72,7 +71,6 @@ public class ProductReservationServiceImpl implements ProductReservationService 
         return true;
     }
 
-    @Transactional
     public boolean processExclusiveProductWithLock(String skuCode) {
         log.info("Locking and processing exclusive product with SKU: {}", skuCode);
 
